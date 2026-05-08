@@ -71,6 +71,7 @@ El sistema busca complementar la enseñanza tradicional mediante un entorno digi
 
 Su enfoque será pedagógico, lúdico y accesible, orientado a estudiantes de contextos vulnerables, utilizando recursos tecnológicos simples pero significativos.
 
+
 ESTADO DEL ARTE
 Referentes Analizados
 Tipo	Referente	Funcionalidades	Fortalezas	Debilidades	Brechas identificadas
@@ -86,6 +87,7 @@ Página	problemas-matematicos.com	Explicaciones matemáticas	Secuencia de aprend
 Página	matesdeprimaria.es	Problemas contextualizados	Favorece lógica matemática	Poca interactividad	Incorporar dinámicas visuales
 ANÁLISIS DEL ESTADO DEL ARTE
 El análisis permitió identificar que la mayoría de plataformas educativas enfocadas en matemáticas presentan limitaciones relacionadas con:
+
 
 Contenido excesivamente textual.
 Recursos interactivos limitados.

@@ -1,1 +1,1 @@
-
+Desarrollar una plataforma web educativa que fortalezca la comprensión y dominio de la división en estudiantes de quinto de primaria de instituciones públicas de Medellín (estratos 1, 2 y 3), mediante estrategias pedagógicas dinámicas y el uso de recursos interactivos y tecnológicos.

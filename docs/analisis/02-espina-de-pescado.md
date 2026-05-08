@@ -4,7 +4,7 @@
 <img width="921" height="518" alt="image" src="https://github.com/user-attachments/assets/e13625a9-e1c9-43c5-abe4-0ad512038154" />
 
 
-image# Modelo de Ishikawa: Dificultades en la Enseñanza y Aprendizaje de la División
+# Modelo de Ishikawa: Dificultades en la Enseñanza y Aprendizaje de la División
 Contexto: Estudiantes de 5º de primaria (instituciones públicas de Medellín – estratos 1 a 3).
 
 Efecto Principal

@@ -1,52 +1,30 @@
-stateDiagram-v2 [*] --> No_Autenticado No_Autenticado --> Autenticado: Login Exitoso (id_estado = 2)
+sequenceDiagram autonumber participant A as Administrador participant U as Estudiante (Usuario) participant S as Sistema (Spring Boot) participant DB as Base de Datos (SQL Server)
 
-state Autenticado {
-    [*] --> Explorando: Navega por CURSO / MODULO
-    Explorando --> En_Ejercicio: Selecciona EJERCICIO
-    
-    state En_Ejercicio {
-        [*] --> Esperando_Respuesta
-        Esperando_Respuesta --> Evaluando: Envía OPCION_RESPUESTA
-        Evaluando --> Fallido: es_correcta = false
-        Fallido --> Esperando_Respuesta: Reintento
-        Evaluando --> Exitoso: es_correcta = true
-    }
-    
-    Exitoso --> Actualizando_Progreso: Registra en RESULTADO
-    Actualizando_Progreso --> Verificando_Insignia
-    Verificando_Insignia --> Premiado: Se crea registro en USUARIO_INSIGNIA
-    Verificando_Insignia --> Explorando: Aún no cumple meta
-    Premiado --> Explorando
-}
+Note over A, DB: 1. Fase de Preparación (Administrador)
+A->>S: Registra nuevo Curso y Módulo
+S->>DB: Insertar en CURSO y MODULO
+DB-->>S: Confirmación de guardado
+A->>S: Crea Ejercicios con Nivel y Opciones
+S->>DB: Insertar en EJERCICIO, NIVEL y OPCION_RESPUESTA
+DB-->>S: Contenido publicado exitosamente
 
-Autenticado --> [*]: Logout
+Note over U, DB: 2. Fase de Aprendizaje (Estudiante)
+U->>S: Inicia sesión (Correo/Password)
+S->>DB: Consultar USUARIO, ROL y ESTADO_USUARIO
+DB-->>S: Valida acceso (Activo) y Tipo de Rol
 
+U->>S: Selecciona un Módulo para practicar
+S->>DB: Buscar EJERCICIOS vinculados al MODULO
+DB-->>S: Retorna Enunciados y Opciones
 
-------------------------------------------------------------------------------------------------
+U->>S: Envía respuesta del ejercicio
+S->>S: Compara con campo "es_correcta"
 
+S->>DB: Insertar en RESULTADO y actualizar PROGRESO
+DB-->>S: Registros actualizados
 
+Note over S, DB: 3. Fase de Recompensa
+S->>DB: Verificar cumplimiento de metas (INSIGNIA)
+DB->>DB: Crear registro en USUARIO_INSIGNIA
 
-stateDiagram-v2
-[*] --> Admin_Autenticado: Login (id_rol = 1)
-
-state "Gestión de Usuarios" as Users {
-    [*] --> Lista_Usuarios
-    Lista_Usuarios --> Suspendiendo: Cambia id_estado a 'Inactivo'
-    Suspendiendo --> Lista_Usuarios: Update USUARIO
-    Lista_Usuarios --> Activando: Cambia id_estado a 'Activo'
-    Activando --> Lista_Usuarios: Update USUARIO
-}
-
-state "Gestión de Contenido" as Content {
-    [*] --> Creando_Curso: Inserta en CURSO
-    Creando_Curso --> Agregando_Modulo: Inserta en MODULO
-    Agregando_Modulo --> Configurando_Ejercicio: Define EJERCICIO y NIVEL
-    Configurando_Ejercicio --> Publicado: estado = true
-    Publicado --> Editando: Ajusta enunciado o puntaje_nivel
-}
-
-Admin_Autenticado --> Users
-Admin_Autenticado --> Content
-
-Users --> Admin_Autenticado: Regresar al Panel
-Content --> Admin_Autenticado: Regresar al Panel
+S-->>U: Notifica: "¡Ejercicio Correcto e Insignia Obtenida!

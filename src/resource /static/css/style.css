@@ -1,1 +1,112 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #f0f2f5;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
+.contenedor{
+    width: 85%;
+    margin: 30px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.grupo{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+}
+
+input,
+select{
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+input:focus,
+select:focus{
+    outline: none;
+    border: 1px solid #007bff;
+}
+
+.botones{
+    grid-column: span 2;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+button{
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+}
+
+button:hover{
+    opacity: 0.9;
+}
+
+button[type="submit"]{
+    background: #007bff;
+}
+
+.btn-limpiar{
+    background: #6c757d;
+}
+
+.editar{
+    background: #28a745;
+    margin-right: 5px;
+}
+
+.eliminar{
+    background: #dc3545;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+}
+
+table th{
+    background: #007bff;
+    color: white;
+    padding: 15px;
+}
+
+table td{
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+table tr:hover{
+    background: #f5f5f5;
+}

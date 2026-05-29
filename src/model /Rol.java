@@ -1,21 +1,23 @@
 package com.plataforma_educativa.educativa.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 @Entity
-@Table(name = "ROL") // Nombre exacto de la tabla en SQL Server
+@Table(name = "ROL", schema = "dbo")
+@Data
 public class Rol {
 
     @Id
-    @Column(name = "id_rol") // Nombre exacto de la columna PK en SQL
+    @NotNull(message = "El id del rol no puede ser null")
+    @Column(name = "id_rol", nullable = false)
     private Integer idRol;
 
-    @Column(name = "nombre", nullable = false, length = 25)
+    @NotBlank(message = "El nombre del rol no puede estar vacío")
+    @Size(max = 50)
+    @Column(name = "nombre", nullable = false, unique = true, length = 50)
     private String nombre;
-
-    // Getters y Setters
-    public Integer getIdRol() { return idRol; }
-    public void setIdRol(Integer idRol) { this.idRol = idRol; }
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
 }

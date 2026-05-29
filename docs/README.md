@@ -183,4 +183,6 @@ El proyecto utiliza arquitectura MVC:
 # Repositorio del compañero
 
 https://github.com/DASTMUAL/PROYECTO-ENSE-A-DE-DIVISION-X2-CIFRAS
+
+
 https://github.com/Santiagols0923/plataforma_educativa

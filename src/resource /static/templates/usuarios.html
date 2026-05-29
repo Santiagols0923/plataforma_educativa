@@ -1,1 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios</title>
+
+    <link rel="stylesheet"
+          th:href="@{../css/usuarios.css}">
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <h1>GESTIÓN DE USUARIOS</h1>
+
+    <form th:action="@{/guardar-usuario}"
+          th:object="${usuario}"
+          method="post">
+
+        <div class="grid">
+
+            <!-- ID -->
+            <div class="campo">
+
+                <label>ID Usuario</label>
+
+                <input type="number"
+                       th:field="*{idUsuario}"
+                       placeholder="Ingrese ID">
+
+            </div>
+
+            <!-- NOMBRE -->
+            <div class="campo">
+
+                <label>Nombre</label>
+
+                <input type="text"
+                       th:field="*{nombre}"
+                       placeholder="Ingrese nombre">
+
+            </div>
+
+            <!-- IDENTIFICACION -->
+            <div class="campo">
+
+                <label>Identificación</label>
+
+                <input type="text"
+                       th:field="*{identificacion}"
+                       placeholder="Ingrese identificación">
+
+            </div>
+
+            <!-- CORREO -->
+            <div class="campo">
+
+                <label>Correo</label>
+
+                <input type="email"
+                       th:field="*{correo}"
+                       placeholder="Ingrese correo">
+
+            </div>
+
+            <!-- TELEFONO -->
+            <div class="campo">
+
+                <label>Teléfono</label>
+
+                <input type="text"
+                       th:field="*{telefono}"
+                       placeholder="Ingrese teléfono">
+
+            </div>
+
+            <!-- CONTRASEÑA -->
+            <div class="campo">
+
+                <label>Contraseña</label>
+
+                <input type="password"
+                       th:field="*{contrasena}"
+                       placeholder="Ingrese contraseña">
+
+            </div>
+
+            <!-- ROL -->
+            <div class="campo">
+
+                <label>Rol</label>
+
+                <select th:field="*{rol.idRol}">
+
+                    <option value="">
+                        Seleccione Rol
+                    </option>
+
+                    <option th:each="r : ${roles}"
+                            th:value="${r.idRol}"
+                            th:text="${r.nombre}">
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- ESTADO -->
+            <div class="campo">
+
+                <label>Estado</label>
+
+                <select th:field="*{estado.idEstado}">
+
+                    <option value="">
+                        Seleccione Estado
+                    </option>
+
+                    <option th:each="e : ${estados}"
+                            th:value="${e.idEstado}"
+                            th:text="${e.nombreEstado}">
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <!-- BOTONES -->
+        <div class="botones">
+
+            <button type="submit"
+                    class="btn-guardar">
+
+                Guardar
+            </button>
+
+            <button type="reset"
+                    class="btn-limpiar">
+
+                Limpiar
+            </button>
+
+        </div>
+
+    </form>
+
+    <!-- TABLA -->
+    <table>
+
+        <thead>
+
+        <tr>
+
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr th:each="u : ${usuarios}">
+
+            <td th:text="${u.idUsuario}"></td>
+
+            <td th:text="${u.nombre}"></td>
+
+            <td th:text="${u.correo}"></td>
+
+            <td th:text="${u.rol.nombre}"></td>
+
+            <td>
+
+                <span class="estado-activo"
+                      th:if="${u.estado.idEstado == 1}">
+
+                    Activo
+
+                </span>
+
+                <span class="estado-inactivo"
+                      th:if="${u.estado.idEstado == 2}">
+
+                    Inactivo
+
+                </span>
+
+            </td>
+
+            <td class="acciones">
+
+                <a th:href="@{/editar-usuario/{id}(id=${u.idUsuario})}"
+                   class="btn-editar">
+
+                    Editar
+                </a>
+
+                <a th:href="@{/cambiar-estado/{id}(id=${u.idUsuario})}"
+                   class="btn-estado">
+
+                    Estado
+                </a>
+
+                <a th:href="@{/eliminar-usuario/{id}(id=${u.idUsuario})}"
+                   class="btn-eliminar">
+
+                    Eliminar
+                </a>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

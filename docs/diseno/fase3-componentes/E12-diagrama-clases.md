@@ -1,87 +1,147 @@
+# E12 - DIAGRAMA DE CLASES
+
+## Plataforma Educativa Web - Aprendiendo a Dividir
+
+```mermaid id="clz81a"
 classDiagram
-    class Usuario {
-        +Integer idUsuario
-        +String nombre
-        +String identificacion
-        +String correo
-        +String telefono
-        +String contraseña
-    }
 
-    class Rol {
-        +Integer idRol
-        +String nombre
-    }
+%% =========================
+%% CLASES PRINCIPALES
+%% =========================
 
-    class EstadoUsuario {
-        +Integer idEstado
-        +String nombreEstado
-    }
+class Usuario {
+    +Integer idUsuario
+    +String nombre
+    +String identificacion
+    +String correo
+    +String telefono
+    +String contrasena
+}
 
-    class Curso {
-        +Integer idCurso
-        +String nombre
-        +String descripcion
-    }
+class Rol {
+    +Integer idRol
+    +String nombre
+}
 
-    class Modulo {
-        +Integer idModulo
-        +String nombre
-    }
+class EstadoUsuario {
+    +Integer idEstado
+    +String nombreEstado
+}
 
-    class Ejercicio {
-        +Integer idEjercicio
-        +String enunciado
-        +Boolean estado
-    }
+class Curso {
+    +Integer idCurso
+    +String nombre
+    +String descripcion
+}
 
-    class Nivel {
-        +Integer idNivel
-        +String nombre
-        +String descripcion
-        +Integer puntajeNivel
-    }
+class Modulo {
+    +Integer idModulo
+    +String nombre
+}
 
-    class OpcionRespuesta {
-        +Integer idOpcion
-        +Integer respuestaOpcion
-        +Boolean esCorrecta
-    }
+class Nivel {
+    +Integer idNivel
+    +String nombre
+    +String descripcion
+    +Integer puntajeNivel
+}
 
-    class Resultado {
-        +Integer idResultado
-        +Integer respuestaUsuario
-        +DateTime fecha
-    }
+class Ejercicio {
+    +Integer idEjercicio
+    +String enunciado
+    +Boolean estado
+}
 
-    class Progreso {
-        +Integer idProgreso
-        +DateTime fechaActualizacion
-    }
+class OpcionRespuesta {
+    +Integer idOpcion
+    +Integer respuestaOpcion
+    +Boolean esCorrecta
+}
 
-    class Insignia {
-        +Integer idInsignia
-        +String nombre
-    }
+class Resultado {
+    +Integer idResultado
+    +Integer respuestaUsuario
+    +LocalDateTime fecha
+}
 
-    class UsuarioInsignia {
-        +Integer idUsuarioInsignia
-        +DateTime fechaObtenida
-    }
+class Progreso {
+    +Integer idProgreso
+    +LocalDateTime fechaActualizacion
+}
 
-    %% Relaciones
-    Usuario "n" -- "1" Rol : tiene
-    Usuario "n" -- "1" EstadoUsuario : posee
-    Usuario "1" -- "n" Resultado : genera
-    Usuario "1" -- "n" Progreso : registra
-    Usuario "1" -- "n" UsuarioInsignia : obtiene
+class Insignia {
+    +Integer idInsignia
+    +String nombre
+}
 
-    Curso "1" -- "n" Modulo : contiene
-    Modulo "1" -- "n" Ejercicio : agrupa
-    Modulo "1" -- "n" Progreso : pertenece
+class UsuarioInsignia {
+    +Integer idUsuarioInsignia
+    +LocalDateTime fechaObtenida
+}
 
-    Ejercicio "n" -- "1" Nivel : categorizado
-    Ejercicio "1" -- "n" OpcionRespuesta : ofrece
-    Ejercicio "1" -- "n" Resultado : evaluado
+%% =========================
+%% RELACIONES
+%% =========================
 
-    Insignia "1" -- "n" UsuarioInsignia : otorgada
+Usuario "N" --> "1" Rol : tiene
+Usuario "N" --> "1" EstadoUsuario : posee
+
+Usuario "1" --> "N" Resultado : genera
+Usuario "1" --> "N" Progreso : registra
+Usuario "1" --> "N" UsuarioInsignia : obtiene
+
+Curso "1" --> "N" Modulo : contiene
+
+Modulo "1" --> "N" Ejercicio : agrupa
+Modulo "1" --> "N" Progreso : pertenece
+
+Nivel "1" --> "N" Ejercicio : clasifica
+
+Ejercicio "1" --> "N" OpcionRespuesta : contiene
+Ejercicio "1" --> "N" Resultado : genera
+
+Insignia "1" --> "N" UsuarioInsignia : asigna
+
+UsuarioInsignia "N" --> "1" Insignia : referencia
+UsuarioInsignia "N" --> "1" Usuario : referencia
+
+Resultado "N" --> "1" Usuario : pertenece
+Resultado "N" --> "1" Ejercicio : corresponde
+
+Ejercicio "N" --> "1" Nivel : pertenece
+Ejercicio "N" --> "1" Modulo : pertenece
+
+Progreso "N" --> "1" Usuario : pertenece
+Progreso "N" --> "1" Modulo : pertenece
+
+```
+
+---
+
+# Relación con el Proyecto
+
+Este diagrama representa las entidades implementadas en:
+
+* Spring Boot
+* SQL Server
+* JPA Repository
+* Thymeleaf
+
+y mantiene coherencia con:
+
+* MER del proyecto
+* CRUD visual de Usuario
+* CRUD visual de Resultado
+* Login por roles
+* Gestión de módulos y ejercicios
+
+---
+
+# Tecnologías Relacionadas
+
+* Java
+* Spring Boot
+* SQL Server
+* Thymeleaf
+* JPA
+* MVC

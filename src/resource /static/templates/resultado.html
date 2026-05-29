@@ -1,1 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Resultados</title>
+
+    <link rel="stylesheet"
+          th:href="@{../css/resultado.css}">
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <div class="card">
+
+        <h1>GESTIÓN DE RESULTADOS</h1>
+
+        <form th:action="@{/guardar-resultado}"
+              th:object="${resultado}"
+              method="post">
+
+            <div class="grupo">
+
+                <label>Usuario</label>
+
+                <select th:field="*{usuario}" required>
+
+                    <option value="">
+                        Seleccione usuario
+                    </option>
+
+                    <option th:each="u : ${usuarios}"
+                            th:value="${u.idUsuario}"
+                            th:text="${u.nombre}">
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="grupo">
+
+                <label>Ejercicio</label>
+
+                <select th:field="*{ejercicio}" required>
+
+                    <option value="">
+                        Seleccione ejercicio
+                    </option>
+
+                    <option th:each="e : ${ejercicios}"
+                            th:value="${e.idEjercicio}"
+                            th:text="${e.enunciado}">
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="grupo">
+
+                <label>Respuesta Usuario</label>
+
+                <input type="number"
+                       th:field="*{respuestaUsuario}"
+                       placeholder="Ingrese respuesta"
+                       required>
+
+            </div>
+
+            <div class="grupo">
+
+                <label>Fecha</label>
+
+                <input type="text"
+                       value="Automática"
+                       disabled>
+
+            </div>
+
+            <div class="botones">
+
+                <button type="submit"
+                        class="btn-guardar">
+
+                    Guardar Resultado
+
+                </button>
+
+                <button type="reset"
+                        class="btn-limpiar">
+
+                    Limpiar
+
+                </button>
+
+            </div>
+
+        </form>
+
+        <div class="tabla-contenedor">
+
+            <table>
+
+                <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Ejercicio</th>
+                    <th>Respuesta</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="r : ${resultados}">
+
+                    <td th:text="${r.idResultado}"></td>
+
+                    <td th:text="${r.usuario.nombre}"></td>
+
+                    <td th:text="${r.ejercicio.enunciado}"></td>
+
+                    <td th:text="${r.respuestaUsuario}"></td>
+
+                    <td th:text="${r.fecha}"></td>
+
+                    <td>
+
+                        <a th:href="@{/eliminar-resultado/{id}(id=${r.idResultado})}"
+                           class="eliminar">
+
+                            Eliminar
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

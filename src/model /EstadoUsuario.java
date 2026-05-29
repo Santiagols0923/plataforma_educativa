@@ -1,20 +1,21 @@
 package com.plataforma_educativa.educativa.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.Data;
 
 @Entity
-@Table(name = "ESTADO")
-public class Estado {
+@Table(name = "ESTADO_USUARIO", schema = "dbo")
+@Data
+public class EstadoUsuario {
+
     @Id
-    @Column(name = "id_estado")
+    @NotNull(message = "El id del estado no puede ser null")
+    @Column(name = "id_estado", nullable = false)
     private Integer idEstado;
 
-    @Column(name = "nombre", nullable = false, length = 20)
-    private String nombre;
-
-    // Getters y Setters
-    public Integer getIdEstado() { return idEstado; }
-    public void setIdEstado(Integer idEstado) { this.idEstado = idEstado; }
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    @NotBlank(message = "El nombre del estado no puede estar vacío")
+    @Size(max = 25)
+    @Column(name = "nombre_estado", nullable = false, length = 25)
+    private String nombreEstado;
 }
